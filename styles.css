@@ -47,6 +47,11 @@ body {
     user-select: none;
 }
 
+
+#type-btn {
+    display: none; /* Hide the buttons initially */
+}
+
 h1, h2, h3 {
     color: var(--text-primary);
     font-weight: 600;

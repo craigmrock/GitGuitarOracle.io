@@ -162,27 +162,31 @@ import { scalesData } from './scalesData.js';
   
   keysButtons.forEach((button, index) => {
     const { major, minor } = scalesData[index];
-  
+
     button.addEventListener('click', () => {
-        showTypeBtns();
+        showTypeBtns(); // Show the type buttons container
         setupFretboard([]); // Clear the fretboard before displaying new notes
-  
+
         // Update the message and clear scale results
         updateMessage(scalesData[index].key);
-  
+
         // Add event listeners for major and minor buttons
+        const typeBtnContainer = document.getElementById('type-btn');
         const majBtn = document.querySelector('.major-btn');
         const minBtn = document.querySelector('.minor-btn');
 
         if (!majBtn || !minBtn) {
-          console.error("Major or Minor buttons are missing.");
-          return;
-      }
-  
+            console.error("Major or Minor buttons are missing.");
+            return;
+        }
+
+        // Show the buttons when a key is selected
+        typeBtnContainer.style.display = 'block';
+
         majBtn.addEventListener('click', () => handleScaleSelection(major));
         minBtn.addEventListener('click', () => handleScaleSelection(minor));
     });
-  });
+});
   
   /**
   * Updates the message element and clears the scale results.
