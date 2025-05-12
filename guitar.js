@@ -121,17 +121,19 @@ import { scalesData } from './scalesData.js';
       noteFret.classList.add('highlighted');
       noteFret.style.setProperty('--noteDotOpacity', 1); // Explicitly set the opacity
   
-      /* // Set background color for the root note
+      // Set background color for the root note
       if (noteName.trim().toLowerCase() === scaleNotes[0].trim().toLowerCase()) {
           noteFret.style.backgroundColor = '#61eb34'; // Green background for the root note
       }
   
-      // Set background color for the third note in the scale
+      /* // Set background color for the third note in the scale
       if (scaleNotes.length >= 7 && noteName.trim().toLowerCase() === scaleNotes[2].trim().toLowerCase()) {
           noteFret.style.backgroundColor = '#d142f5'; // Purple background for the third note
       } */
   }
   }
+
+
   
   const tools = {
     createElement(element, content) {
@@ -209,7 +211,7 @@ import { scalesData } from './scalesData.js';
     // Select a random scale and update scaleResultsString
     scaleResultsString = scaleArray[Math.floor(Math.random() * scaleArray.length)];
     scaleText.textContent = scaleResultsString;
-    //console.log("Selected Scale:", scaleResultsString);
+    console.log("Selected Scale:", scaleResultsString);
   
     // Extract notes from scaleResultsString and update the fretboard
     const scaleNotes = scaleResultsString.split(': ')[1].split(' - ');
