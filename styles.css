@@ -211,6 +211,24 @@ label {
     box-sizing: border-box; /* Include padding and border in width calculations */
 }
 
+.fret-number {
+    flex: 1; /* Ensure each fret number takes up equal space */
+    text-align: center;
+    border-right: 1px solid #444; /* Optional: Add a border between fret numbers */
+}
+
+.fret-number:last-child {
+    border-right: none; /* Remove the border for the last fret */
+}
+
+.fret-number:first-child {
+    background-color: #444; /* Optional: Different background for the nut */
+    min-width: 76px;
+    border-right: 1px solid;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
 
 
 .sg-string {
