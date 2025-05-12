@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+:root {
+    --background: #FAFAFA;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --primary: #3B82F6;
+    --border: #D1D1D1;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --fretboard-height: 200;
+    --number-of-strings: 6;
+    --string-height: 8;
+    --half-string-height: calc(var(--string-height) / 2);
+    --string-top-position: calc(var(--fretboard-height) / var(--number-of-strings) / 2 - var(--half-string-height));
+    --double-fretmark-position-1: calc(var(--fretboard-height) * 0.25);
+    --double-fretmark-position-2: calc(var(--fretboard-height) * 0.75);
+    --noteDotOpacity: 0;
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Flexbox layout for the header */
+.header-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+/* Style the logo */
+/* Style the logo as a guitar pick */
+.logo {
+    width: 50px; /* Adjust the size of the circle */
+    height: 50px; /* Ensure the height matches the width for a perfect circle */
+    background-color: #32CD32; /* Optional: Add a background color if the image has transparency */
+    border-radius: 50%; /* Make the logo a circle */
+    object-fit: cover; /* Ensure the image fits within the circle without distortion */
+    margin-right: 10px; /* Add spacing between the logo and the text */
+    display: inline-block; /* Ensure it behaves like an inline element */
+}
+body {
+    /* background-color: #282c34; */
+    background-color: #faf9f6;
+    font-family: 'Roboto', sans-serif;
+    /* color: #4dc5e7; */
+    color: #2d2d2d;
+    user-select: none;
+}
+
+h1, h2, h3 {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+p {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#logo {
+    max-width: 5%;
+    height: auto;
+    border-radius: 10px;
+}
+.settings {
+    display: flex;
+    color: #fff;
+    padding: 5px;
+    border-bottom: 1px solid #444;
+    background-color: #282828;
+}
+
+label {
+    margin: 0 10px;
+}
+
+.string {
+    width: 100%;
+    height:100%;
+    display: flex;
+    position: relative;
+}
+.string::before {
+    content: '';
+    width: 100%;
+    height: calc(var(--string-height) * 1px);
+    background: linear-gradient(#eee, #999);
+    /* box-shadow: 76px 3px 10px #806233; */
+    z-index: 1;
+    position: absolute;
+    top: 22px;
+    top: calc(var(--string-top-position) * 1px);
+}
+.note-fret {
+    display: flex;
+    flex: 1;
+    border-right: 10px solid;
+    border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.note-fret:first-child {
+    background: #5c5e5e;
+    min-width: 76px;
+    border-right: 12px solid;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-image: linear-gradient(to left, #bbb,#fff,#bbb);
+}
+.note-fret:before {
+    content: attr(data-note);
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    line-height: 33px;
+    text-align: center;
+    background: #4dc5e7;
+    z-index: 2;
+    color: #eee;
+    opacity: var(--noteDotOpacity);
+}
+.single-fretmark::after, .double-fretmark:before, .double-fretmark::after {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #5c5e5e;
+}
+
+.single-fretmark::after {
+    top: calc(var(--fretboard-height) /2 *1px);
+    transform: translate(0, -50%);
+}
+.double-fretmark:before {
+    top: calc(var(--double-fretmark-position-1) * 1px);
+    transform: translate(-140%, -50%);
+}
+.double-fretmark::after {
+    top: calc(var(--double-fretmark-position-2) * 1px);
+    transform: translate(-140%, -50%);
+}
+.note-name-section {
+    width: 100%;
+    color: #fff;
+    font-weight: 100;font-size: 2.5em;
+    display: flex;
+    justify-content: center;
+}
+.note-name-section span {
+    padding: 10px;
+    cursor: pointer;
+}
+.note-name-section span:hover {
+    color: #4dc5e7;
+}
+.lower-container{
+    display: flex;
+}
+#scale-gen-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 33px;
+    text-align: center;
+    background: #3B82F6;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+}
+#type-select-btn {
+    background-color: #10B981;
+    color: #ffffff;
+    width: 60px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 70%;
+}
+
+.fretboard1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+}
+
+.fret-number-row {
+    display: flex;
+    width: 100%;
+    height: 30px; /* Adjust height as needed */
+    background-color: #333; /* Background color for the fret number row */
+    color: #fff; /* Text color for fret numbers */
+    font-size: 16px; /* Adjust font size as needed */
+    align-items: center;
+    justify-content: space-between; /* Ensure even spacing */
+    box-sizing: border-box; /* Include padding and border in width calculations */
+}
+
+
+
+.sg-string {
+    width: 100%;
+    height:100%;
+    display: flex;
+    position: relative;
+}
+
+.sg-string::before {
+    content: '';
+    width: 100%;
+    height: calc(var(--string-height) * 1px);
+    background: linear-gradient(#eee, #999);
+    z-index: 1;
+    position: absolute;
+    top: 22px;
+    top: calc(var(--string-top-position) * 1px);
+}
+
+.sg-note-fret {
+    display: flex;
+    flex: 1;
+    border-right: 10px solid;
+    border-image: linear-gradient(to left, #777, #bbb, #777) 1 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.sg-note-fret:first-child {
+    background: #5c5e5e;
+    min-width: 76px;
+    border-right: 12px solid;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-image: linear-gradient(to left, #bbb,#fff,#bbb);
+}
+
+.sg-note-fret:before {
+    content: attr(data-note);
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    line-height: 33px;
+    text-align: center;
+    background: #E5E7EB;
+    z-index: 2;
+    color: #374151;
+    opacity: var(--noteDotOpacity);
+}
+
+.sg-note-fret.highlighted {
+    /*background: #4dc5e7;  Same background as hover */
+    border-color: #eee; /* Same border color as hover */
+    color: #fff; /* Text color for better contrast */
+    opacity: 1; /* Ensure visibility */
+}
+
+.sg-single-fretmark::after, .sg-double-fretmark:before, .sg-double-fretmark::after {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #5c5e5e;
+}
+
+.sg-single-fretmark::after {
+    top: calc(var(--fretboard-height) /2 *1px);
+    transform: translate(0, -50%);
+}
+.sg-double-fretmark:before {
+    top: calc(var(--double-fretmark-position-1) * 1px);
+    transform: translate(-140%, -50%);
+}
+.sg-double-fretmark::after {
+    top: calc(var(--double-fretmark-position-2) * 1px);
+    transform: translate(-140%, -50%);
+}
+
