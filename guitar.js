@@ -40,7 +40,7 @@ import { scalesData } from './scalesData.js';
   }
   
   function setupFretboard(scaleNotes) {
-    console.log('Generating fretboard with scale notes:', scaleNotes); // Debugging
+    //console.log('Generating fretboard with scale notes:', scaleNotes); // Debugging
   
     fretboard.innerHTML = ''; // Clear existing fretboard
     root.style.setProperty('--number-of-strings', numberOfStrings);
@@ -149,10 +149,10 @@ import { scalesData } from './scalesData.js';
   
     // Check if scaleResultsString contains sharp or flat notes
     if (scaleResultsString.includes('#')) {
-      console.log("Scale Results String contains sharp notes:", scaleResultsString); // Debugging
+      //console.log("Scale Results String contains sharp notes:", scaleResultsString); // Debugging
         accidentals = 'sharps'; // Update accidentals to sharps
     } else if (scaleResultsString.includes('b')) {
-      console.log("Scale Results String contains flat notes:", scaleResultsString); // Debugging
+      //console.log("Scale Results String contains flat notes:", scaleResultsString); // Debugging
         accidentals = 'flats'; // Update accidentals to flats
     }
   
@@ -162,27 +162,31 @@ import { scalesData } from './scalesData.js';
   
   keysButtons.forEach((button, index) => {
     const { major, minor } = scalesData[index];
-  
+
     button.addEventListener('click', () => {
-        showTypeBtns();
+        showTypeBtns(); // Show the type buttons container
         setupFretboard([]); // Clear the fretboard before displaying new notes
-  
+
         // Update the message and clear scale results
         updateMessage(scalesData[index].key);
-  
+
         // Add event listeners for major and minor buttons
+        const typeBtnContainer = document.getElementById('type-btn');
         const majBtn = document.querySelector('.major-btn');
         const minBtn = document.querySelector('.minor-btn');
 
         if (!majBtn || !minBtn) {
-          console.error("Major or Minor buttons are missing.");
-          return;
-      }
-  
+            console.error("Major or Minor buttons are missing.");
+            return;
+        }
+
+        // Show the buttons when a key is selected
+        typeBtnContainer.style.display = 'block';
+
         majBtn.addEventListener('click', () => handleScaleSelection(major));
         minBtn.addEventListener('click', () => handleScaleSelection(minor));
     });
-  });
+});
   
   /**
   * Updates the message element and clears the scale results.
@@ -205,7 +209,7 @@ import { scalesData } from './scalesData.js';
     // Select a random scale and update scaleResultsString
     scaleResultsString = scaleArray[Math.floor(Math.random() * scaleArray.length)];
     scaleText.textContent = scaleResultsString;
-    console.log("Selected Scale:", scaleResultsString);
+    //console.log("Selected Scale:", scaleResultsString);
   
     // Extract notes from scaleResultsString and update the fretboard
     const scaleNotes = scaleResultsString.split(': ')[1].split(' - ');
