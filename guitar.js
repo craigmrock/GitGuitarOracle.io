@@ -176,6 +176,37 @@ import { scalesData } from './scalesData.js';
         noteName = 'E#'; // Replace F with E# for B Lydian
     }
 
+    if (scaleResultsString.includes('Eb Locrian') && noteName === 'A') {
+      noteName = 'Bbb'; // Replace A with Bbb for Eb Locrian
+    }
+
+    if (scaleResultsString.includes('Ab Phrygian') || scaleResultsString.includes('Db Harmonic Minor')) {
+      if (noteName === 'A') {
+          noteName = 'Bbb'; // Replace A with Bbb for Ab Phrygian or Db Harmonic Minor
+      }
+  }
+
+    if (scaleResultsString.includes('Ab Locrian') || scaleResultsString.includes('Db Phrygian')) {
+      if (noteName === 'D') {
+          noteName = 'Ebb'; // Replace D with Ebb for Ab Locrian
+      }
+      if (noteName === 'A') {
+          noteName = 'Bbb'; // Replace A with Bbb for Ab Locrian
+      }
+    }
+
+    if (scaleResultsString.includes('Db Locrian')) {
+      if (noteName === 'D') {
+          noteName = 'Ebb'; // Replace D with Ebb for Db Locrian
+      }
+      if (noteName === 'G') {
+          noteName = 'Abb'; // Replace G with Abb for Db Locrian
+      }
+      if (noteName === 'A') {
+          noteName = 'Bbb'; // Replace A with Bbb for Db Locrian
+      }
+    }
+
     return noteName;
 }
   
