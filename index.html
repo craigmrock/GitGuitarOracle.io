@@ -54,6 +54,11 @@
 
             <section id="scale-diagram" class="scale-diagram" aria-labelledby="fretboard-heading">
                 <h2 id="fretboard-heading">Fretboard Diagram</h2>
+                <div id="fretboard-controls">
+                  <button onclick="updateNumberOfFrets(5)">5 Frets</button>
+                  <button onclick="updateNumberOfFrets(12)">12 Frets</button>
+                  <button onclick="updateNumberOfFrets(24)">24 Frets</button>
+              </div>
                 <div id="fretboard1" class="fretboard1" role="region" aria-label="Fretboard">
                     <!-- Fretboard notes will be dynamically generated here -->
                 </div>

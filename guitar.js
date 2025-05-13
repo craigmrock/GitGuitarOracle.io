@@ -21,7 +21,6 @@ import { scalesData } from './scalesData.js';
   const fretboard = document.querySelector('.fretboard1');
   const singleFretMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
   const doubleFretMarkPositions = [12, 24];
-  const numberOfFrets = 24;
   const notesFlat = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
   const notesSharp = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
   const instrumentTuningPresets = {
@@ -31,14 +30,23 @@ import { scalesData } from './scalesData.js';
   let accidentals = 'flats';
   let selectedInstrument = 'Guitar (6 strings)';
   let numberOfStrings = instrumentTuningPresets[selectedInstrument].length;
+  let numberOfFrets = 24; // Number of frets on the guitar
   
   let scaleResultsString = '';
-  
+  let currentScaleNotes = []; // Store the current scale notes
   
   function showTypeBtns () {
     document.getElementById("type-btn").style.display = "block";
   }
   
+  function updateNumberOfFrets(newNumberOfFrets) {
+    numberOfFrets = newNumberOfFrets; // Update the global variable
+    setupFretboard(currentScaleNotes); // Regenerate the fretboard with the updated number of frets
+    }
+
+  // Attach to the global `window` object
+  window.updateNumberOfFrets = updateNumberOfFrets;
+
   function setupFretboard(scaleNotes) {
     //console.log('Generating fretboard with scale notes:', scaleNotes); // Debugging
   
@@ -214,8 +222,8 @@ import { scalesData } from './scalesData.js';
     console.log("Selected Scale:", scaleResultsString);
   
     // Extract notes from scaleResultsString and update the fretboard
-    const scaleNotes = scaleResultsString.split(': ')[1].split(' - ');
-    setupFretboard(scaleNotes);
+    currentScaleNotes = scaleResultsString.split(': ')[1].split(' - ');
+    setupFretboard(currentScaleNotes);
   };
   
   })();
