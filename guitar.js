@@ -176,6 +176,21 @@ import { scalesData } from './scalesData.js';
         noteName = 'E#'; // Replace F with E# for B Lydian
     }
 
+    if (scaleResultsString.includes('D Harmonic Minor') || scaleResultsString.includes('G Melodic Minor')) {
+      if( noteName === 'A#') {
+        noteName = 'Bb'; // Replace Db with C# for D Harmonic Minor
+      }
+    }
+
+    if (scaleResultsString.includes('G Harmonic Minor')) {
+      if(noteName === 'A#') {
+        noteName = 'Bb'; // Replace Db with C# for D Harmonic Minor
+      }
+      if(noteName === 'D#') {
+        noteName = 'Eb'; // Replace Db with C# for D Harmonic Minor
+      }
+    }
+
     if (scaleResultsString.includes('Eb Locrian') && noteName === 'A') {
       noteName = 'Bbb'; // Replace A with Bbb for Eb Locrian
     }
