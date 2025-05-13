@@ -160,19 +160,24 @@ import { scalesData } from './scalesData.js';
   
   function generateNoteNames(noteIndex, accidentals) {
     noteIndex = noteIndex % 12;
-  
+
     // Check if scaleResultsString contains sharp or flat notes
     if (scaleResultsString.includes('#')) {
-      //console.log("Scale Results String contains sharp notes:", scaleResultsString); // Debugging
         accidentals = 'sharps'; // Update accidentals to sharps
     } else if (scaleResultsString.includes('b')) {
-      //console.log("Scale Results String contains flat notes:", scaleResultsString); // Debugging
         accidentals = 'flats'; // Update accidentals to flats
     }
-  
-    // Return the appropriate note based on accidentals
-    return accidentals === 'sharps' ? notesSharp[noteIndex] : notesFlat[noteIndex];
-  }
+
+    // Get the appropriate note based on accidentals
+    let noteName = accidentals === 'sharps' ? notesSharp[noteIndex] : notesFlat[noteIndex];
+
+    // Handle special cases for enharmonic equivalents
+    if (scaleResultsString.includes('B Lydian') && noteName === 'F') {
+        noteName = 'E#'; // Replace F with E# for B Lydian
+    }
+
+    return noteName;
+}
   
   keysButtons.forEach((button, index) => {
     const { major, minor } = scalesData[index];
