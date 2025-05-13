@@ -343,3 +343,101 @@ label {
     transform: translate(-140%, -50%);
 }
 
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Adjust the container layout */
+    .container {
+        flex-direction: column; /* Stack elements vertically */
+        padding: 10px;
+    }
+
+    /* Scale Generator Buttons */
+    #scale-gen-btn {
+        width: 30px; /* Smaller button size */
+        height: 30px;
+        font-size: 14px; /* Smaller font size */
+        line-height: 28px;
+    }
+
+    /* Type Select Buttons */
+    #type-select-btn {
+        width: 50px; /* Smaller button size */
+        height: 35px;
+        font-size: 14px; /* Smaller font size */
+    }
+
+    /* Fretboard Controls Buttons */
+    #fretboard-controls button {
+        padding: 8px 12px; /* Smaller padding */
+        font-size: 14px; /* Smaller font size */
+    }
+
+    /* Fretboard */
+    .fretboard1 {
+        width: 100%; /* Ensure it fits within the screen */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+    }
+
+    .fret-number-row {
+        font-size: 14px; /* Smaller font size for fret numbers */
+    }
+
+    .sg-note-fret:before {
+        width: 28px; /* Smaller note dots */
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px; /* Smaller font size for note labels */
+    }
+
+    /* Adjust the logo size */
+    .logo {
+        width: 40px; /* Smaller logo */
+        height: 40px;
+    }
+
+    /* Adjust the note name section */
+    .note-name-section {
+        font-size: 1.5em; /* Smaller font size */
+    }
+
+    /* Hide unnecessary elements for smaller screens */
+    .settings {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    #scale-gen-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+        line-height: 23px;
+    }
+
+    #type-select-btn {
+        width: 45px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    #fretboard-controls button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .fret-number-row {
+        font-size: 12px;
+    }
+
+    .sg-note-fret:before {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 10px;
+    }
+
+    .note-name-section {
+        font-size: 1.2em;
+    }
+}
