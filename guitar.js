@@ -98,6 +98,10 @@ import { scalesData } from './scalesData.js';
   
       const noteName = generateNoteNames(fret + instrumentTuningPresets[selectedInstrument][stringIndex], accidentals);
       noteFret.setAttribute('data-note', noteName);
+
+      //console.log("Note Name:", noteName); // Debugging
+      //console.log("Scale Notes:", scaleNotes); // Debugging
+
   
       // Add single fret marks
       if (stringIndex === 0 && singleFretMarkPositions.includes(fret)) {

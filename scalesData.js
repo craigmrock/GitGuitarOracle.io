@@ -41,7 +41,7 @@ export const scalesData = [
   },
   {
     key: 'A',
-    major: ['A Ionian: A - B - C# - D - E - F# - G#', 'A Lydian: A - B - C#- D# - E - F#- G#', 'A Mixolydian: A - B - C# - D - E - F# - G', 'A Maj Pentatonic: A - B - C# - E - F#'],
+    major: ['A Ionian: A - B - C# - D - E - F# - G#', 'A Lydian: A - B - C# - D# - E - F# - G#', 'A Mixolydian: A - B - C# - D - E - F# - G', 'A Maj Pentatonic: A - B - C# - E - F#'],
     minor: ['A Dorian: A - B - C - D - E - F# - G', 'A Phrygian: A - Bb - C - D - E - F - G', 'A Aeolian: A - B - C - D - E - F - G', 'A Locrian: A - Bb - C - D - Eb - F - G', 'A Melodic Minor: A - B - C - D - E - F# - G#', 'A Min Pentatonic: A - C - D - E - G', 'A Harmonic Minor: A - B - C - D - E - F - G#']
   },
   {
@@ -51,7 +51,7 @@ export const scalesData = [
   },
   {
     key: 'B',
-    major: ['B Ionian: B - C# - D# - E - F# - G# - A#', 'B Lydian: B - C# - D#- E# - F# - G#- A#', 'B Mixolydian: B - C# - D# - E - F# - G# - A', 'B Maj Pentatonic: B - C# - D# - F# - G#'],
+    major: ['B Ionian: B - C# - D# - E - F# - G# - A#', 'B Lydian: B - C# - D# - E# - F# - G# - A#', 'B Mixolydian: B - C# - D# - E - F# - G# - A', 'B Maj Pentatonic: B - C# - D# - F# - G#'],
     minor: ['B Dorian: B - C# - D - E - F# - G# - A', 'B Phrygian: B - C - D - E - F# - G - A', 'B Aeolian: B - C# - D - E - F# - G - A', 'B Locrian: B - C - D - E - F - G - A', 'B Melodic Minor: B - C# - D - E - F# - G# - A#', 'B Min Pentatonic: B - D - E - F# - A', 'B Harmonic Minor: B - C# - D - E - F# - G - A#']
   },
   {
