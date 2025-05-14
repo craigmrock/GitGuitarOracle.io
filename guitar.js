@@ -191,22 +191,19 @@ import { scalesData } from './scalesData.js';
       }
     }
 
-    if (scaleResultsString.includes('Eb Locrian') && noteName === 'A') {
-      noteName = 'Bbb'; // Replace A with Bbb for Eb Locrian
+    if (scaleResultsString.includes('Db Aeolian')) {
+      if(noteName === 'A') {
+        noteName = 'Bbb'; // Replace Db with C# for D Harmonic Minor
+      }
+      if(noteName === 'B') {
+        noteName = 'Cb'; // Replace Db with C# for D Harmonic Minor
+      }
     }
 
-    if (scaleResultsString.includes('Ab Phrygian') || scaleResultsString.includes('Db Harmonic Minor')) {
-      if (noteName === 'A') {
-          noteName = 'Bbb'; // Replace A with Bbb for Ab Phrygian or Db Harmonic Minor
-      }
-  }
-
-    if (scaleResultsString.includes('Ab Locrian') || scaleResultsString.includes('Db Phrygian')) {
-      if (noteName === 'D') {
-          noteName = 'Ebb'; // Replace D with Ebb for Ab Locrian
-      }
-      if (noteName === 'A') {
-          noteName = 'Bbb'; // Replace A with Bbb for Ab Locrian
+    if (scaleResultsString.includes('Db Min Pentatonic') ||
+    scaleResultsString.includes('Db Dorian')) {
+      if(noteName === 'B') {
+        noteName = 'Cb'; // Replace Db with C# for D Harmonic Minor
       }
     }
 
@@ -219,6 +216,38 @@ import { scalesData } from './scalesData.js';
       }
       if (noteName === 'A') {
           noteName = 'Bbb'; // Replace A with Bbb for Db Locrian
+      }
+      if(noteName === 'B') {
+        noteName = 'Cb'; // Replace Db with C# for D Harmonic Minor
+      }
+    }
+
+    if (scaleResultsString.includes('Db Phrygian')) {
+      if (noteName === 'D') {
+          noteName = 'Ebb'; // Replace D with Ebb for Db Locrian
+      }
+      if(noteName === 'B') {
+        noteName = 'Cb'; // Replace Db with C# for D Harmonic Minor
+      }
+      if (noteName === 'A') {
+          noteName = 'Bbb'; // Replace A with Bbb for Db Locrian
+      }
+    }
+
+    if (scaleResultsString.includes('Ab Phrygian') ||
+    scaleResultsString.includes('Db Harmonic Minor') ||
+    scaleResultsString.includes('Eb Locrian')) {
+      if (noteName === 'A') {
+          noteName = 'Bbb'; // Replace A with Bbb for Ab Phrygian or Db Harmonic Minor
+      }
+  }
+
+    if (scaleResultsString.includes('Ab Locrian')) {
+      if (noteName === 'D') {
+          noteName = 'Ebb'; // Replace D with Ebb for Ab Locrian
+      }
+      if (noteName === 'A') {
+          noteName = 'Bbb'; // Replace A with Bbb for Ab Locrian
       }
     }
 
