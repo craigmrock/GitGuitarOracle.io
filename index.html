@@ -12,69 +12,75 @@
     <title>Guitar Oracle</title>
 </head>
 <body>
-  <header>
-    <div class="container-md header-container">
-        <h1>Guitar Oracle</h1>
-    </div>
-</header>
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="header-title">Guitar Oracle</h1>
+        </div>
+    </header>
 
-    <main>
-        <div class="container-md">
-          <section class="intro-text" aria-labelledby="intro-heading">
-            <h2 id="intro-heading" class="visually-hidden">Introduction</h2>
-            <p>Welcome to Guitar Oracle! This tool generates scales to practice on the guitar!</p>
-            <p>First, click a button from the Scale Generator. Then, select Major or Minor.</br>
-              The root note will have a green background for reference.</br>
-              You can also select fretboard size!</p>
-            <p>Repeat to find more scales and master the fretboard!</p>
-        </section>
+    <main class="main-content">
+        <div class="container">
+            <!-- Instructions Section -->
+            <section class="intro-text" aria-labelledby="intro-heading">
+                <h2 id="intro-heading" class="visually-hidden">Introduction</h2>
+                <button id="toggle-intro" class="btn btn-primary" aria-expanded="false" aria-controls="intro-list">Show Instructions</button>
+                <ul id="intro-list" class="intro-list hidden">
+                    <li>Click a button from the Scale Generator.</li>
+                    <li>Then, select Major or Minor.<br>
+                        The root note will have a green background for reference.</li>
+                    <li>You can also select fretboard size!</li>
+                    <li>Repeat to find more scales and master the fretboard!</li>
+                </ul>
+            </section>
 
+            <!-- Scale Generator Section -->
             <section class="scale-generator" aria-labelledby="scale-generator-heading">
                 <h2 id="scale-generator-heading">Scale Generator</h2>
                 <div class="key-buttons" role="group" aria-label="Key Buttons">
-                    <button type="button" id="scale-gen-btn" class="cKey-btn" aria-label="Key of C">C</button>
-                    <button type="button" id="scale-gen-btn" class="fKey-btn" aria-label="Key of F">F</button>
-                    <button type="button" id="scale-gen-btn" class="bbKey-btn" aria-label="Key of B flat">Bb</button>
-                    <button type="button" id="scale-gen-btn" class="ebKey-btn" aria-label="Key of E flat">Eb</button>
-                    <button type="button" id="scale-gen-btn" class="abKey-btn" aria-label="Key of A flat">Ab</button>
-                    <button type="button" id="scale-gen-btn" class="dbKey-btn" aria-label="Key of D flat">Db</button>
-                    <button type="button" id="scale-gen-btn" class="gKey-btn" aria-label="Key of G">G</button>
-                    <button type="button" id="scale-gen-btn" class="dKey-btn" aria-label="Key of D">D</button>
-                    <button type="button" id="scale-gen-btn" class="aKey-btn" aria-label="Key of A">A</button>
-                    <button type="button" id="scale-gen-btn" class="eKey-btn" aria-label="Key of E">E</button>
-                    <button type="button" id="scale-gen-btn" class="bKey-btn" aria-label="Key of B">B</button>
-                    <button type="button" id="scale-gen-btn" class="fsKey-btn" aria-label="Key of F sharp">F#</button>
-                    <button type="button" id="scale-gen-btn" class="csKey-btn" aria-label="Key of C sharp">C#</button>
+                    <button type="button" class="btn key-btn cKey-btn" aria-label="Key of C">C</button>
+                    <button type="button" class="btn key-btn fKey-btn" aria-label="Key of F">F</button>
+                    <button type="button" class="btn key-btn bbKey-btn" aria-label="Key of B flat">Bb</button>
+                    <button type="button" class="btn key-btn ebKey-btn" aria-label="Key of E flat">Eb</button>
+                    <button type="button" class="btn key-btn abKey-btn" aria-label="Key of A flat">Ab</button>
+                    <button type="button" class="btn key-btn dbKey-btn" aria-label="Key of D flat">Db</button>
+                    <button type="button" class="btn key-btn gKey-btn" aria-label="Key of G">G</button>
+                    <button type="button" class="btn key-btn dKey-btn" aria-label="Key of D">D</button>
+                    <button type="button" class="btn key-btn aKey-btn" aria-label="Key of A">A</button>
+                    <button type="button" class="btn key-btn eKey-btn" aria-label="Key of E">E</button>
+                    <button type="button" class="btn key-btn bKey-btn" aria-label="Key of B">B</button>
+                    <button type="button" class="btn key-btn fsKey-btn" aria-label="Key of F sharp">F#</button>
+                    <button type="button" class="btn key-btn csKey-btn" aria-label="Key of C sharp">C#</button>
                 </div>
-                <div id="message" style="color: #2d2d2d; font-size: 16px; margin-top: 10px;" aria-live="polite"></div>
-                <div id="type-btn" role="group" aria-label="Scale Type Buttons">
-                    <button type="button" id="type-select-btn" class="major-btn" aria-label="Major Scale">Major</button>
-                    <button type="button" id="type-select-btn" class="minor-btn" aria-label="Minor Scale">Minor</button>
+                <div id="message" class="message" aria-live="polite"></div>
+                <div id="type-btn" class="type-buttons" role="group" aria-label="Scale Type Buttons">
+                    <button type="button" class="btn btn-success major-btn" aria-label="Major Scale">Major</button>
+                    <button type="button" class="btn btn-warning minor-btn" aria-label="Minor Scale">Minor</button>
                 </div>
                 <div id="scale-results" class="scale-results" aria-live="polite">The Guitar Oracle is Listening</div>
             </section>
 
+            <!-- Fretboard Section -->
             <section id="scale-diagram" class="scale-diagram" aria-labelledby="fretboard-heading">
                 <h2 id="fretboard-heading">Fretboard Diagram</h2>
-                <div id="fretboard-controls">
-                  <button onclick="updateNumberOfFrets(5)">5 Frets</button>
-                  <button onclick="updateNumberOfFrets(12)">12 Frets</button>
-                  <button onclick="updateNumberOfFrets(24)">24 Frets</button>
-              </div>
+                <div id="fretboard-controls" class="fretboard-controls">
+                    <button class="btn btn-outline-secondary" onclick="updateNumberOfFrets(5)">5 Frets</button>
+                    <button class="btn btn-outline-secondary" onclick="updateNumberOfFrets(12)">12 Frets</button>
+                    <button class="btn btn-outline-secondary" onclick="updateNumberOfFrets(24)">24 Frets</button>
+                </div>
                 <div id="fretboard1" class="fretboard1" role="region" aria-label="Fretboard">
                     <!-- Fretboard notes will be dynamically generated here -->
                 </div>
-                <div class="sg-note-name-section" aria-hidden="true"></div>
             </section>
         </div>
     </main>
 
-    <footer>
-        <div class="container-md">
+    <footer class="footer">
+        <div class="container">
             <p>&copy; 2025 Guitar Oracle. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="./guitar.js" type="module"></script>
+    <script src="./eventListeners.js" type="module"></script>
 </body>
 </html>
