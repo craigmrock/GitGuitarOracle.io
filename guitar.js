@@ -40,9 +40,21 @@ import { scalesData } from './scalesData.js';
   }
   
   function updateNumberOfFrets(newNumberOfFrets) {
-    numberOfFrets = newNumberOfFrets; // Update the global variable
-    setupFretboard(currentScaleNotes); // Regenerate the fretboard with the updated number of frets
-    }
+    // Update the global variable
+    numberOfFrets = newNumberOfFrets;
+
+    // Get the fretboard1 element
+    const fretboard = document.getElementById('fretboard1');
+
+    // Remove any existing fretboard size classes
+    fretboard.classList.remove('fretboard-5', 'fretboard-12', 'fretboard-24');
+
+    // Add the new class based on the number of frets
+    fretboard.classList.add(`fretboard-${newNumberOfFrets}`);
+
+    // Regenerate the fretboard with the updated number of frets
+    setupFretboard(currentScaleNotes);
+}
 
   // Attach to the global `window` object
   window.updateNumberOfFrets = updateNumberOfFrets;

@@ -27,6 +27,39 @@
     align-items: center; /* Align items vertically in the center */
 }
 
+/* Header */
+.header {
+    background-color: #3B82F6;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Instructions Section */
+.intro-text {
+    margin-bottom: 20px;
+}
+
+#toggle-intro {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.intro-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.intro-list.hidden {
+    display: none;
+}
+
 /* Style the logo */
 /* Style the logo as a guitar pick */
 .logo {
@@ -39,12 +72,36 @@
     display: inline-block; /* Ensure it behaves like an inline element */
 }
 body {
-    /* background-color: #282c34; */
-    background-color: #faf9f6;
     font-family: 'Roboto', sans-serif;
-    /* color: #4dc5e7; */
-    color: #2d2d2d;
-    user-select: none;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.intro-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.intro-list li {
+    margin-bottom: 10px;
+}
+
+.intro-list.hidden {
+    display: none;
+}
+
+#toggle-intro {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.type-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 
@@ -52,7 +109,12 @@ body {
     display: none; /* Hide the buttons initially */
 }
 
-h1, h2, h3 {
+h1, h2 {
+    color: #222;
+    font-weight: 700;
+}
+
+h3 {
     color: var(--text-primary);
     font-weight: 600;
 }
@@ -64,10 +126,9 @@ p {
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 #logo {
@@ -171,6 +232,12 @@ label {
 .lower-container{
     display: flex;
 }
+
+/* Scale Generator */
+.scale-generator {
+    margin-bottom: 20px;
+}
+
 /* Scale Generator Button */
 #scale-gen-btn {
     background-color: #3B82F6; /* Blue */
@@ -191,6 +258,24 @@ label {
     background-color: #2563EB; /* Darker Blue */
 }
 
+.key-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.key-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
 /* Type Select Button */
 #type-select-btn {
     background-color: #059669; /* Green */
@@ -209,6 +294,26 @@ label {
     background-color: #047857; /* Darker Green */
 }
 
+/* Fretboard Section */
+.fretboard-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Fretboard */
+.fretboard1 {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 100%; /* Ensure it fits within the screen */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+}
+
 /* Fretboard Controls Button */
 #fretboard-controls button {
     background-color: #D97706; /* Amber/Orange */
@@ -223,13 +328,6 @@ label {
 
 #fretboard-controls button:hover {
     background-color: #B45309; /* Darker Amber */
-}
-
-.fretboard1 {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
 }
 
 .fret-number-row {
@@ -343,6 +441,56 @@ label {
     transform: translate(-140%, -50%);
 }
 
+/* Media Query for 5 Frets */
+@media (max-width: 768px) {
+    .fretboard-5 {
+        width: 100%; /* Example: Adjust width for 5 frets */
+        padding: 5px; /* Adjust padding for smaller screens */
+        border-radius: 3px; /* Adjust border radius */
+    }
+
+    .fret-number-row {
+        
+        font-size: 12px;
+    }
+
+    .fret-number {
+        flex: 0 0 calc(100% / 6); /* Match the width of sg-note-fret */
+        text-align: center;
+        border-right: 1px solid #444; /* Optional: Add a border between fret numbers */
+        padding: 5px 0; /* Add padding for better spacing */
+        font-size: 10px; /* Adjust font size for smaller screens */
+        line-height: 20px; /* Match the line height of sg-note-fret */
+        width: 28px; /* Match the width of sg-note-fret */
+        height: 28px; /* Match the height of sg-note-fret */
+    }
+
+    .fret-number:last-child {
+        border-right: none; /* Remove the border for the last fret */
+    }
+
+    .fret-number:first-child {
+        background-color: #444; /* Optional: Different background for the nut */
+        min-width: 76px; /* Allow the nut to resize */
+        border-right: 1px solid #444; /* Optional: Add a border for the nut */
+    }
+
+    .sg-note-fret {
+        flex: 0 0 calc(100% / 6); /* Divide the width equally for 12 frets */
+        width: calc(100% / 6); /* Ensure each fret takes up equal space */
+        height: 28px; /* Adjust height for smaller screens */
+        line-height: 28px; /* Match the height */
+        font-size: 12px; /* Adjust font size for smaller screens */
+    }
+
+    .sg-note-fret:before {
+        width: 28px; /* Smaller note dots */
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px; /* Smaller font size for note labels */
+    }
+}
+
 /* Mobile Styles */
 @media (max-width: 768px) {
     /* Adjust the container layout */
@@ -372,22 +520,14 @@ label {
         font-size: 14px; /* Smaller font size */
     }
 
-    /* Fretboard */
     .fretboard1 {
-        width: 100%; /* Ensure it fits within the screen */
-        overflow-x: auto; /* Allow horizontal scrolling if needed */
+        padding: 5px; /* Reduce padding for smaller screens */
+        border-radius: 3px; /* Adjust border radius */
+        overflow-x: scroll; /* Ensure horizontal scrolling if needed */
     }
 
-    .fret-number-row {
-        font-size: 14px; /* Smaller font size for fret numbers */
-    }
 
-    .sg-note-fret:before {
-        width: 28px; /* Smaller note dots */
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px; /* Smaller font size for note labels */
-    }
+    
 
     /* Adjust the logo size */
     .logo {
@@ -406,38 +546,13 @@ label {
     }
 }
 
-@media (max-width: 480px) {
-    /* Further adjustments for very small screens */
-    #scale-gen-btn {
-        width: 25px;
-        height: 25px;
-        font-size: 12px;
-        line-height: 23px;
-    }
 
-    #type-select-btn {
-        width: 45px;
-        height: 30px;
-        font-size: 12px;
-    }
 
-    #fretboard-controls button {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-
-    .fret-number-row {
-        font-size: 12px;
-    }
-
-    .sg-note-fret:before {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        font-size: 10px;
-    }
-
-    .note-name-section {
-        font-size: 1.2em;
-    }
+/* Footer */
+.footer {
+    background-color: #3B82F6;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
 }
