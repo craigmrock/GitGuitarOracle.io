@@ -68,7 +68,7 @@ import { scalesData } from './scalesData.js';
         !fretboard.classList.contains('fretboard-12') ||
         !fretboard.classList.contains('fretboard-24')
       ) {
-        fretboard.classList.add('fretboard-5');
+        fretboard.classList.add('fretboard-24');
       }
     }
   }
