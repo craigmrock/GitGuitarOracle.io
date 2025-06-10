@@ -59,6 +59,25 @@ import { scalesData } from './scalesData.js';
   // Attach to the global `window` object
   window.updateNumberOfFrets = updateNumberOfFrets;
 
+  function handleFretboardMediaQuery() {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    if (mediaQuery.matches) {
+      const fretboard = document.getElementById('fretboard1');
+      if (
+        !fretboard.classList.contains('fretboard-5') ||
+        !fretboard.classList.contains('fretboard-12') ||
+        !fretboard.classList.contains('fretboard-24')
+      ) {
+        fretboard.classList.add('fretboard-5');
+      }
+    }
+  }
+
+// Listen for changes in viewport size
+window.addEventListener('resize', handleFretboardMediaQuery);
+// Run on initial load
+handleFretboardMediaQuery();
+
   function setupFretboard(scaleNotes) {
     //console.log('Generating fretboard with scale notes:', scaleNotes); // Debugging
   

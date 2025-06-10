@@ -523,6 +523,12 @@ label {
         overflow-x: scroll; /* Ensure horizontal scrolling if needed */
     }
 
+    .sg-string {
+       min-width: calc(28px * 24 + 76px);
+    width: min-content;
+    display: flex;
+    position: relative;
+    }
     /* Media query for .fretboard1 when .fretboard-5 is also present */
 
     .fretboard1.fretboard-5 {
