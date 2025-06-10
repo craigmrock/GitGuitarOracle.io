@@ -562,7 +562,7 @@ label {
         justify-content: center;
     }
 
-    .fretboard1.fretboard-24 .fret-number-row {
+    .fretboard1.fretboard-12 .fret-number-row {
         min-width: calc(28px * 12 + 76px);
         width: min-content;
         display: flex;
