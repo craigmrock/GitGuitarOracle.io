@@ -542,6 +542,7 @@ label {
         padding: 7px;     /* Adjust padding for mobile */
         border-radius: 5px;
         overflow-x: auto;
+        box-sizing: border-box; /* Ensure padding is included in width */
     }
 
     /* When .fretboard1.fretboard-12 is present on small screens, style all .fret-number the same */
