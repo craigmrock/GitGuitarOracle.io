@@ -533,74 +533,52 @@ label {
         border-radius: 6px;
         overflow-x: auto;
     }
-    
+   
     /* Media query for .fretboard1 when .fretboard-12 is also present */
+    @media (max-width: 768px) {
     .fretboard1.fretboard-12 {
-        width: 98vw;      /* Make it nearly full width on small screens */
-        min-width: 350px; /* Minimum width for usability */
-        max-width: 100vw; /* Prevent overflow */
-        padding: 7px;     /* Adjust padding for mobile */
+        width: 98vw;
+        min-width: 350px;
+        max-width: 100vw;
+        padding: 7px;
         border-radius: 5px;
         overflow-x: auto;
+        box-sizing: border-box;
     }
-
-    /* When .fretboard1.fretboard-12 is present on small screens, style all .fret-number the same */
-    .fretboard1.fretboard-12 .fret-number {
-        width: 28px;
-        min-width: 28px;
-        max-width: 28px;
+    .fretboard1.fretboard-12 .fret-number-row,
+    .fretboard1.fretboard-12 .sg-string {
+        width: 100%;
+        min-width: 0;
+        display: flex;
+        position: relative;
+    }
+    .fretboard1.fretboard-12 .fret-number,
+    .fretboard1.fretboard-12 .sg-note-fret {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: none;
+        width: auto;
         text-align: center;
         border-right: 1px solid #444;
         line-height: 28px;
         height: 28px;
-        background: #333;
-        color: #fff;
         font-size: 12px;
         box-sizing: border-box;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-
-    .fretboard1.fretboard-12 .fret-number-row {
-        min-width: calc(28px * 12 + 76px);
-        width: min-content;
-        display: flex;
-        position: relative;
-    }
-
-        .fretboard1.fretboard-12 .fret-number:first-child {
+    .fretboard1.fretboard-12 .fret-number:first-child,
+    .fretboard1.fretboard-12 .sg-note-fret:first-child {
         width: 76px;
         min-width: 76px;
         max-width: 76px;
+        flex: 0 0 76px;
         background: #444;
         flex-shrink: 0;
         flex-grow: 0;
     }
-
-    .fretboard1.fretboard-12 .fret-number:last-child {
-        border-right: none;
-        }
-
-    /* Media query for .fretboard1 when .fretboard-12 is also present */
-    .fretboard1.fretboard-12 .sg-string {
-    min-width: calc(28px * 12 + 76px);
-    width: min-content;
-    display: flex;
-    position: relative;
-}
-
-.fretboard1.fretboard-12 .sg-note-fret {
-    flex: 0 0 28px;
-    width: 28px;
-    min-width: 28px;
-    max-width: 28px;
-}
-.fretboard1.fretboard-12 .sg-note-fret:first-child {
-    min-width: 76px;
-    max-width: 76px;
-    width: 76px;
-}
+}  
 
     /* Media query for .fretboard1 when .fretboard-24 is also present */
     .fretboard1.fretboard-24 {
