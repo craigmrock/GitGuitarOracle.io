@@ -103,6 +103,23 @@ body {
     gap: 10px;
     margin-bottom: 20px;
 }
+.cKey-btn    { background-color: #2563eb; color: #fff; } /* Bold Blue */
+.fKey-btn    { background-color: #059669; color: #fff; } /* Bold Green */
+.bbKey-btn   { background-color: #f59e42; color: #222; } /* Bold Orange-Yellow */
+.ebKey-btn   { background-color: #dc2626; color: #fff; } /* Bold Red */
+.abKey-btn   { background-color: #7c3aed; color: #fff; } /* Bold Purple */
+.dbKey-btn   { background-color: #db2777; color: #fff; } /* Bold Pink */
+.gKey-btn    { background-color: #0ea5e9; color: #fff; } /* Bold Sky Blue */
+.dKey-btn    { background-color: #eab308; color: #222; } /* Bold Gold */
+.aKey-btn    { background-color: #22c55e; color: #fff; } /* Bold Green */
+.eKey-btn    { background-color: #ea580c; color: #fff; } /* Bold Orange */
+.bKey-btn    { background-color: #4f46e5; color: #fff; } /* Bold Indigo */
+.fsKey-btn   { background-color: #be185d; color: #fff; } /* Bold Deep Pink */
+.csKey-btn   { background-color: #14b8a6; color: #fff; } /* Bold Teal */
+.key-btn:focus, .key-btn:hover {
+    filter: brightness(0.9);
+    outline: 2px solid #222;
+}
 
 
 #type-btn {
@@ -272,8 +289,13 @@ label {
     font-weight: bold;
     border-radius: 50%;
     text-align: center;
-    line-height: 50px;
+    line-height: 50px;           /* Ensures vertical centering */
     cursor: pointer;
+    display: flex;               /* Add flexbox for perfect centering */
+    align-items: center;         /* Vertically center */
+    justify-content: center;     /* Horizontally center */
+    padding: 0;                  /* Remove default padding */
+    border: none;                /* Optional: remove border if not needed */
 }
 
 /* Type Select Button */
