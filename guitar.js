@@ -334,6 +334,7 @@ import { library } from './library.js';
     const messageElement = document.getElementById("message");
     messageElement.textContent = `You selected the key of: ${key}`;
     scaleText.textContent = ''; // Clear the scale-results element
+    scaleDefinitionText.textContent = ''; // Clear the scale-definition elemen
   }
   
   /**
@@ -343,6 +344,7 @@ import { library } from './library.js';
   function handleScaleSelection(scaleArray) {
     const scaleResultsElement = document.getElementById("scale-results");
     scaleResultsElement.style.display = "block";
+    
   
     // Select a random scale and update scaleResultsString
     scaleResultsString = scaleArray[Math.floor(Math.random() * scaleArray.length)];
