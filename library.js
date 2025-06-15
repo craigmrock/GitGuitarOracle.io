@@ -9,7 +9,7 @@ export const library =
         'Locrian': 'The Locrian mode is the seventh mode of the major scale. It has a dark and unstable sound, often used in metal music. It is characterized by a minor second, a diminished fifth, and a minor sixth.',
         'Melodic Minor': 'The Melodic Minor scale is a minor scale with a raised sixth and seventh degree when ascending, and a natural minor scale when descending. It has a unique sound that is often used in jazz and classical music.',
         'Harmonic Minor': 'The Harmonic Minor scale is a minor scale with a raised seventh degree. It has a Middle Eastern or exotic sound, often used in classical and metal music.',
-        'Major Pentatonic': 'The Major Pentatonic scale is a five-note scale derived from the major scale. It has a bright and uplifting sound, often used in folk and country music.',
-        'Minor Pentatonic': 'The Minor Pentatonic scale is a five-note scale derived from the natural minor scale. It has a bluesy and soulful sound, often used in blues, rock, and jazz music.',
+        'Maj Pentatonic': 'The Major Pentatonic scale is a five-note scale derived from the major scale. It has a bright and uplifting sound, often used in folk and country music.',
+        'Min Pentatonic': 'The Minor Pentatonic scale is a five-note scale derived from the natural minor scale. It has a bluesy and soulful sound, often used in blues, rock, and jazz music.',
     };
     
