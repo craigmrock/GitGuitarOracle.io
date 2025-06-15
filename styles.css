@@ -84,25 +84,6 @@ body {
     padding: 0;
 }
 
-.intro-list {
-    list-style-type: disc;
-    margin-left: 20px;
-    padding-left: 0;
-}
-
-.intro-list li {
-    margin-bottom: 10px;
-}
-
-.intro-list.hidden {
-    display: none;
-}
-
-#toggle-intro {
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
 .type-buttons {
     display: flex;
     gap: 10px;
@@ -126,6 +107,11 @@ body {
     outline: 2px solid #222;
 }
 
+#fretboard-heading {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
 
 #type-btn {
     display: none; /* Hide the buttons initially */
@@ -258,6 +244,21 @@ label {
 /* Scale Generator */
 .scale-generator {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* Center children horizontally */
+    justify-content: center;
+    text-align: center;
+}
+.key-buttons,
+#type-btn,
+#scale-results,
+#message {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 /* Scale Generator Button */
@@ -324,6 +325,7 @@ label {
 /* Fretboard Section */
 .fretboard-controls {
     display: flex;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
 }
