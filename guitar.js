@@ -150,7 +150,7 @@ import { library } from './library.js';
   
       // Set background color for the root note
       if (noteName.trim().toLowerCase() === scaleNotes[0].trim().toLowerCase()) {
-          noteFret.style.backgroundColor = '#61eb34'; // Green background for the root note
+          noteFret.style.backgroundColor = '#56d62d'; // Green background for the root note
       }
   
       /* // Set background color for the third note in the scale
