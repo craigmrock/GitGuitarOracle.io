@@ -355,17 +355,21 @@ import { library } from './library.js';
 
     // Update scaleDefinitionText if scaleText includes a key from library.js
     let found = false;
-const scaleTextLower = scaleText.textContent.toLowerCase();
-for (const key in library) {
-    if (scaleTextLower.includes(key.toLowerCase())) {
+    const scaleTextLower = scaleText.textContent.toLowerCase();
+    const keysSorted = Object.keys(library).sort((a, b) => b.length - a.length);
+
+    for (const key of keysSorted) {
+    // Create a regex to match the key as a whole word, case-insensitive
+    const regex = new RegExp(`\\b${key}\\b`, 'i');
+    if (regex.test(scaleText.textContent)) {
         scaleDefinitionText.textContent = library[key];
         found = true;
         break;
     }
-}
-if (!found) {
+  }
+  if (!found) {
     scaleDefinitionText.textContent = '';
-}
+  }
   };
   
   })();
