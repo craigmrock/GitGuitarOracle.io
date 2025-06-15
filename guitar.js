@@ -1,4 +1,6 @@
 import { scalesData } from './scalesData.js';
+import { library } from './library.js';
+
 
 (function() {
     const keysButtons = new Array();
@@ -17,6 +19,7 @@ import { scalesData } from './scalesData.js';
   keysButtons[12] = document.querySelector('.csKey-btn');
   
   const scaleText = document.querySelector('.scale-results');
+  const scaleDefinitionText = document.querySelector('.scale-results-definition');
   const root = document.documentElement;
   const fretboard = document.querySelector('.fretboard1');
   const singleFretMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
@@ -349,6 +352,20 @@ import { scalesData } from './scalesData.js';
     // Extract notes from scaleResultsString and update the fretboard
     currentScaleNotes = scaleResultsString.split(': ')[1].split(' - ');
     setupFretboard(currentScaleNotes);
+
+    // Update scaleDefinitionText if scaleText includes a key from library.js
+    let found = false;
+const scaleTextLower = scaleText.textContent.toLowerCase();
+for (const key in library) {
+    if (scaleTextLower.includes(key.toLowerCase())) {
+        scaleDefinitionText.textContent = library[key];
+        found = true;
+        break;
+    }
+}
+if (!found) {
+    scaleDefinitionText.textContent = '';
+}
   };
   
   })();
