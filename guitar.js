@@ -18,6 +18,7 @@ import { library } from './library.js';
   keysButtons[11] = document.querySelector('.fsKey-btn');
   keysButtons[12] = document.querySelector('.csKey-btn');
   
+  const synth = new Tone.Synth().toDestination();
   const scaleText = document.querySelector('.scale-results');
   const scaleDefinitionText = document.querySelector('.scale-results-definition');
   const root = document.documentElement;
@@ -117,6 +118,19 @@ import { library } from './library.js';
       //console.log("Note Name:", noteName); // Debugging
       //console.log("Scale Notes:", scaleNotes); // Debugging
 
+      // Add MIDI playback on click
+      noteFret.addEventListener('click', () => {
+    // Standard tuning MIDI numbers for open strings (E2, A2, D3, G3, B3, E4)
+    const openStringMidi = [64, 59, 55, 50, 45, 40]; // E4, B3, G3, D3, A2, E2 (from high E to low E)
+    const midiBase = openStringMidi[stringIndex];
+    const midiNumber = midiBase + fret;
+    // Convert MIDI number to note name and octave
+    const noteNames = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const noteIdx = midiNumber % 12;
+    const octave = Math.floor(midiNumber / 12) - 1;
+    const midiNote = noteNames[noteIdx] + octave;
+    synth.triggerAttackRelease(midiNote, "8n");
+});
   
       // Add single fret marks
       if (stringIndex === 0 && singleFretMarkPositions.includes(fret)) {
@@ -335,6 +349,13 @@ import { library } from './library.js';
     messageElement.textContent = `You selected the key of: ${key}`;
     scaleText.textContent = ''; // Clear the scale-results element
     scaleDefinitionText.textContent = ''; // Clear the scale-definition elemen
+
+    // Hide the play scale button if it exists
+    const playBtn = document.getElementById('play-scale-btn');
+    if (playBtn) {
+        playBtn.style.display = 'none';
+    }
+
   }
   
   /**
@@ -344,34 +365,77 @@ import { library } from './library.js';
   function handleScaleSelection(scaleArray) {
     const scaleResultsElement = document.getElementById("scale-results");
     scaleResultsElement.style.display = "block";
-    
-  
+
     // Select a random scale and update scaleResultsString
     scaleResultsString = scaleArray[Math.floor(Math.random() * scaleArray.length)];
     scaleText.textContent = scaleResultsString;
     console.log("Selected Scale:", scaleResultsString);
-  
+
     // Extract notes from scaleResultsString and update the fretboard
     currentScaleNotes = scaleResultsString.split(': ')[1].split(' - ');
     setupFretboard(currentScaleNotes);
 
-    // Update scaleDefinitionText if scaleText includes a key from library.js
+    // --- Add Play Button ---
+    let playBtn = document.getElementById('play-scale-btn');
+if (!playBtn) {
+    playBtn = document.createElement('button');
+    playBtn.id = 'play-scale-btn';
+    playBtn.textContent = '▶ Play Scale';
+    playBtn.style.marginLeft = '10px';
+    scaleText.parentNode.insertBefore(playBtn, scaleText.nextSibling);
+}
+// Always show the button when a scale is selected
+playBtn.style.display = 'inline-block';
+    playBtn.onclick = () => {
+    const openStringMidi = [64, 59, 55, 50, 45, 40];
+    const rootOctave = Math.floor(openStringMidi[5] / 12) - 1; // E2 = MIDI 40, octave 2
+
+    const noteToMidi = {
+        "C": 0, "C#": 1, "Db": 1, "D": 2, "D#": 3, "Eb": 3, "E": 4, "F": 5,
+        "F#": 6, "Gb": 6, "G": 7, "G#": 8, "Ab": 8, "A": 9, "A#": 10, "Bb": 10, "B": 11
+    };
+
+    const rootNoteName = currentScaleNotes[0].replace(/[^A-G#b]/g, '');
+    const rootMidi = noteToMidi[rootNoteName] + (rootOctave + 1) * 12;
+
+    // Play each note in the scale except the last one
+    for (let idx = 0; idx < currentScaleNotes.length - 1; idx++) {
+        const note = currentScaleNotes[idx];
+        const cleanNote = note.replace(/[^A-G#b]/g, '');
+        const midiNumber = noteToMidi[cleanNote] !== undefined
+            ? rootMidi + ((noteToMidi[cleanNote] - noteToMidi[rootNoteName] + 12) % 12)
+            : rootMidi;
+        const octave = Math.floor(midiNumber / 12) - 1;
+        const midiNoteName = cleanNote + octave;
+        setTimeout(() => {
+            synth.triggerAttackRelease(midiNoteName, "8n");
+        }, idx * 350);
+    }
+
+    // Play the octave (root note in next octave) as the last note
+    setTimeout(() => {
+        const nextOctave = Math.floor((rootMidi + 12) / 12) - 1;
+        const midiNoteName = rootNoteName + nextOctave;
+        synth.triggerAttackRelease(midiNoteName, "8n");
+    }, (currentScaleNotes.length - 1) * 350);
+};
+
+    // --- existing code for scale definition ---
     let found = false;
     const scaleTextLower = scaleText.textContent.toLowerCase();
     const keysSorted = Object.keys(library).sort((a, b) => b.length - a.length);
 
     for (const key of keysSorted) {
-    // Create a regex to match the key as a whole word, case-insensitive
-    const regex = new RegExp(`\\b${key}\\b`, 'i');
-    if (regex.test(scaleText.textContent)) {
-        scaleDefinitionText.textContent = library[key];
-        found = true;
-        break;
+        const regex = new RegExp(`\\b${key}\\b`, 'i');
+        if (regex.test(scaleText.textContent)) {
+            scaleDefinitionText.textContent = library[key];
+            found = true;
+            break;
+        }
     }
-  }
-  if (!found) {
-    scaleDefinitionText.textContent = '';
-  }
-  };
+    if (!found) {
+        scaleDefinitionText.textContent = '';
+    }
+}
   
   })();
