@@ -1,4 +1,5 @@
 import { scalesData } from './scalesData.js';
+import { chordsData } from './chordsData.js';
 import { library } from './library.js';
 
 
@@ -26,6 +27,14 @@ import { library } from './library.js';
   const doubleFretMarkPositions = [12, 24];
   const notesFlat = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
   const notesSharp = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+   const chordFretboard1 = document.querySelector('.vertical-fretboard1');
+  const chordFretboard2 = document.querySelector('.vertical-fretboard2');
+  const chordFretboard3 = document.querySelector('.vertical-fretboard3');
+  const chordFretboard4 = document.querySelector('.vertical-fretboard4');
+  const chordText = document.querySelector('.chord-results1');
+  const chordText2 = document.querySelector('.chord-results2');
+  const chordText3 = document.querySelector('.chord-results3');
+  const chordText4 = document.querySelector('.chord-results4');
   const instrumentTuningPresets = {
     'Guitar (6 strings)': [4, 11, 7, 2, 9, 4]
   };
@@ -41,6 +50,31 @@ import { library } from './library.js';
   function showTypeBtns () {
     document.getElementById("type-btn").style.display = "block";
   }
+
+function createVerticalChordFretboard(chordNotes, tuning = [4, 11, 7, 2, 9, 4], numFrets = 5) {
+    const fretboard = document.createElement('div');
+    fretboard.className = 'vertical-chord-fretboard';
+
+    // Reverse the string order so low E is leftmost, high E is rightmost
+    for (let string = 0; string < tuning.length; string++) {
+        const stringIndex = tuning.length - 1 - string; // reverse order
+        const stringDiv = document.createElement('div');
+        stringDiv.className = 'fretboard-string';
+        for (let fret = 0; fret <= numFrets; fret++) {
+            const noteIndex = (tuning[stringIndex] + fret) % 12;
+            const noteName = accidentals === 'sharps' ? notesSharp[noteIndex] : notesFlat[noteIndex];
+            const fretDiv = document.createElement('div');
+            fretDiv.className = 'fretboard-fret' + (fret === 0 ? ' nut' : '');
+            fretDiv.textContent = noteName;
+            if (chordNotes.includes(noteName)) {
+                fretDiv.classList.add('chord-note');
+            }
+            stringDiv.appendChild(fretDiv);
+        }
+        fretboard.appendChild(stringDiv);
+    }
+    return fretboard;
+}
   
   function updateNumberOfFrets(newNumberOfFrets) {
     // Update the global variable
@@ -89,6 +123,7 @@ import { library } from './library.js';
           string.appendChild(noteFret);
       }
   }
+
   
   /**
    * Creates a string element for the fretboard.
@@ -372,6 +407,58 @@ import { library } from './library.js';
   if (!found) {
     scaleDefinitionText.textContent = '';
   }
+  // --- NEW CODE: Show chords for matching key ---
+const keyName = scaleResultsString.split(':')[0].trim();
+const keyObj = chordsData.find(obj => obj.key === keyName);
+console.log('scaleResultsString:', scaleResultsString);
+console.log('keyName:', keyName);
+console.log('keyObj:', keyObj);
+// ...existing code...
+const chordDiagramHeading = document.getElementById('chord-diagram-heading');
+const chordFretboardsContainer = document.querySelector('.chord-fretboards-container');
+
+if (keyName) {
+    const matchingObjs = chordsData.filter(obj => obj.key === keyName);
+    if (matchingObjs.length > 0) {
+        const randomObj = matchingObjs[Math.floor(Math.random() * matchingObjs.length)];
+        const progressionKeys = Object.keys(randomObj).filter(k => k !== 'key');
+        const randomProgressionKey = progressionKeys[Math.floor(Math.random() * progressionKeys.length)];
+        const chords = randomObj[randomProgressionKey];
+        // Clear the container
+        chordFretboardsContainer.innerHTML = '';
+        // Add progression label directly under the heading
+        let progressionLabel = document.querySelector('.progression-label');
+        if (progressionLabel) progressionLabel.remove();
+        progressionLabel = document.createElement('div');
+        progressionLabel.className = 'progression-label';
+        progressionLabel.textContent = randomProgressionKey;
+        chordDiagramHeading.insertAdjacentElement('afterend', progressionLabel);
+        // Add each chord diagram
+        if (Array.isArray(chords)) {
+            for (let i = 0; i < 4; i++) {
+                const chordDiv = document.createElement('div');
+                chordDiv.className = `vertical-fretboard${i+1}`;
+                if (chords[i]) {
+                    const [chordName, notesPart] = chords[i].split(':');
+                    const chordNotes = notesPart ? notesPart.split('-').map(n => n.trim()) : [];
+                    const container = document.createElement('div');
+                    container.className = 'chord-container';
+                    const label = document.createElement('div');
+                    label.className = 'chord-label';
+                    label.textContent = chordName ? chordName.trim() : '';
+                    container.appendChild(label);
+                    container.appendChild(createVerticalChordFretboard(chordNotes));
+                    chordDiv.appendChild(container);
+                }
+                chordFretboardsContainer.appendChild(chordDiv);
+            }
+        }
+    } else {
+        chordFretboardsContainer.innerHTML = '';
+        let progressionLabel = document.querySelector('.progression-label');
+        if (progressionLabel) progressionLabel.remove();
+    }
+}
   };
   
   })();
