@@ -435,24 +435,31 @@ if (keyName) {
         chordDiagramHeading.insertAdjacentElement('afterend', progressionLabel);
         // Add each chord diagram
         if (Array.isArray(chords)) {
-            for (let i = 0; i < 4; i++) {
-                const chordDiv = document.createElement('div');
-                chordDiv.className = `vertical-fretboard${i+1}`;
-                if (chords[i]) {
-                    const [chordName, notesPart] = chords[i].split(':');
-                    const chordNotes = notesPart ? notesPart.split('-').map(n => n.trim()) : [];
-                    const container = document.createElement('div');
-                    container.className = 'chord-container';
-                    const label = document.createElement('div');
-                    label.className = 'chord-label';
-                    label.textContent = chordName ? chordName.trim() : '';
-                    container.appendChild(label);
-                    container.appendChild(createVerticalChordFretboard(chordNotes));
-                    chordDiv.appendChild(container);
-                }
-                chordFretboardsContainer.appendChild(chordDiv);
-            }
+    for (let i = 0; i < 4; i++) {
+        const chordDiv = document.createElement('div');
+        chordDiv.className = `vertical-fretboard${i+1}`;
+        if (chords[i]) {
+            const [chordName, notesPart] = chords[i].split(':');
+            const chordNotes = notesPart ? notesPart.split('-').map(n => n.trim()) : [];
+            const container = document.createElement('div');
+            container.className = 'chord-container';
+            // Chord name
+            const label = document.createElement('div');
+            label.className = 'chord-label';
+            label.textContent = chordName ? chordName.trim() : '';
+            container.appendChild(label);
+            // Chord notes below chord name
+            const notesDiv = document.createElement('div');
+            notesDiv.className = 'chord-notes';
+            notesDiv.textContent = 'Notes: ' + chordNotes.join(', ');
+            container.appendChild(notesDiv);
+            // Fretboard diagram
+            container.appendChild(createVerticalChordFretboard(chordNotes));
+            chordDiv.appendChild(container);
         }
+        chordFretboardsContainer.appendChild(chordDiv);
+    }
+}
     } else {
         chordFretboardsContainer.innerHTML = '';
         let progressionLabel = document.querySelector('.progression-label');

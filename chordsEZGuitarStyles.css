@@ -31,6 +31,13 @@
   font-size: 1.1em;
 }
 
+.chord-notes {
+  text-align: center;
+  font-size: 0.95em;
+  color: #444;
+  margin-bottom: 6px;
+}
+
 .vertical-chord-fretboard {
   display: flex;
   flex-direction: row;
