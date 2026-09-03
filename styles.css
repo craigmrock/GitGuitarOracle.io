@@ -1032,3 +1032,13 @@ input[type=range]::-moz-range-track {
     padding: 10px 0;
     margin-top: 20px;
 }
+
+.footer-link {
+    color: #fff;
+    font-weight: 700;
+}
+
+.footer-link:focus-visible,
+.footer-link:hover {
+    color: #f59e42;
+}
