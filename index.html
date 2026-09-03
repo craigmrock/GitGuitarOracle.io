@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="./styles.css">
     <title>Guitar Oracle</title>
 </head>
+
 <body>
     <header class="header">
         <div class="container header-container">
@@ -20,33 +23,80 @@
 
     <main class="main-content">
         <div class="container">
-            
-            <!-- Scale Generator Section -->
-            <section class="scale-generator" aria-labelledby="scale-generator-heading">
-                <h2 id="scale-generator-heading">Scale Generator</h2>
-                <div class="key-buttons" role="group" aria-label="Key Buttons">
-                    <button type="button" class="btn key-btn cKey-btn" aria-label="Key of C">C</button>
-                    <button type="button" class="btn key-btn fKey-btn" aria-label="Key of F">F</button>
-                    <button type="button" class="btn key-btn bbKey-btn" aria-label="Key of B flat">Bb</button>
-                    <button type="button" class="btn key-btn ebKey-btn" aria-label="Key of E flat">Eb</button>
-                    <button type="button" class="btn key-btn abKey-btn" aria-label="Key of A flat">Ab</button>
-                    <button type="button" class="btn key-btn dbKey-btn" aria-label="Key of D flat">Db</button>
-                    <button type="button" class="btn key-btn gKey-btn" aria-label="Key of G">G</button>
-                    <button type="button" class="btn key-btn dKey-btn" aria-label="Key of D">D</button>
-                    <button type="button" class="btn key-btn aKey-btn" aria-label="Key of A">A</button>
-                    <button type="button" class="btn key-btn eKey-btn" aria-label="Key of E">E</button>
-                    <button type="button" class="btn key-btn bKey-btn" aria-label="Key of B">B</button>
-                    <button type="button" class="btn key-btn fsKey-btn" aria-label="Key of F sharp">F#</button>
-                    <button type="button" class="btn key-btn csKey-btn" aria-label="Key of C sharp">C#</button>
-                </div>
-                <div id="message" class="message" aria-live="polite"></div>
-                <div id="type-btn" class="type-buttons" role="group" aria-label="Scale Type Buttons">
-                    <button type="button" class="btn btn-success major-btn" aria-label="Major Scale">Major</button>
-                    <button type="button" class="btn btn-warning minor-btn" aria-label="Minor Scale">Minor</button>
-                </div>
-                <div id="scale-results" class="scale-results" aria-live="polite">The Guitar Oracle is Listening</div>
-                <div id="scale-results-definition" class="scale-results-definition" aria-live="polite"></div>
-            </section>
+
+            <div class="control-workspace">
+                <section class="tuner-panel" aria-labelledby="tuner-heading">
+                    <div class="tuner">
+                        <h2 id="tuner-heading">Tuner</h2>
+                        <p class="tuner-subtitle">Play a reference string</p>
+                        <div class="tuner-buttons" role="group" aria-label="Guitar string reference tones">
+                            <button type="button" class="tuner-button lowE-btn" aria-label="Low E string">E</button>
+                            <button type="button" class="tuner-button A-btn" aria-label="A string">A</button>
+                            <button type="button" class="tuner-button D-btn" aria-label="D string">D</button>
+                            <button type="button" class="tuner-button G-btn" aria-label="G string">G</button>
+                            <button type="button" class="tuner-button B-btn" aria-label="B string">B</button>
+                            <button type="button" class="tuner-button highE-btn" aria-label="High E string">E</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Scale Generator Section -->
+                <section class="scale-generator" aria-labelledby="scale-generator-heading">
+                    <h2 id="scale-generator-heading">Scale Generator</h2>
+                    <div class="key-buttons" role="group" aria-label="Key Buttons">
+                        <button type="button" class="btn key-btn cKey-btn" aria-label="Key of C">C</button>
+                        <button type="button" class="btn key-btn fKey-btn" aria-label="Key of F">F</button>
+                        <button type="button" class="btn key-btn bbKey-btn" aria-label="Key of B flat">Bb</button>
+                        <button type="button" class="btn key-btn ebKey-btn" aria-label="Key of E flat">Eb</button>
+                        <button type="button" class="btn key-btn abKey-btn" aria-label="Key of A flat">Ab</button>
+                        <button type="button" class="btn key-btn dbKey-btn" aria-label="Key of D flat">Db</button>
+                        <button type="button" class="btn key-btn gKey-btn" aria-label="Key of G">G</button>
+                        <button type="button" class="btn key-btn dKey-btn" aria-label="Key of D">D</button>
+                        <button type="button" class="btn key-btn aKey-btn" aria-label="Key of A">A</button>
+                        <button type="button" class="btn key-btn eKey-btn" aria-label="Key of E">E</button>
+                        <button type="button" class="btn key-btn bKey-btn" aria-label="Key of B">B</button>
+                        <button type="button" class="btn key-btn fsKey-btn" aria-label="Key of F sharp">F#</button>
+                        <button type="button" class="btn key-btn csKey-btn" aria-label="Key of C sharp">C#</button>
+                    </div>
+                    <div id="message" class="message" aria-live="polite"></div>
+                    <div id="type-btn" class="type-buttons" role="group" aria-label="Scale Type Buttons">
+                        <button type="button" class="btn btn-success major-btn" aria-label="Major Scale">Major</button>
+                        <button type="button" class="btn btn-warning minor-btn" aria-label="Minor Scale">Minor</button>
+                    </div>
+                </section>
+
+                <!-- Metronome Section -->
+                <section class="metronome-panel" aria-labelledby="metronome-heading">
+                    <h2 id="metronome-heading" class="visually-hidden">Metronome</h2>
+                    <div class="metronome" role="group" aria-label="Metronome">
+                        <div class="bpm-display">
+                            <span class="tempo">140</span>
+                            <span class="bpm">BPM</span>
+                        </div>
+                        <div class="tempo-text">Allegro</div>
+                        <div class="tempo-settings">
+                            <button type="button" class="adjust-tempo-btn decrease-tempo"
+                                aria-label="Decrease tempo">-</button>
+                            <input type="range" min="20" max="280" step="1" value="140" class="slider"
+                                aria-label="Tempo in beats per minute">
+                            <button type="button" class="adjust-tempo-btn increase-tempo"
+                                aria-label="Increase tempo">+</button>
+                        </div>
+                        <button type="button" class="start-stop" aria-pressed="false">START</button>
+                        <div class="measures">
+                            <button type="button" class="subtract-beats stepper"
+                                aria-label="Decrease beats per measure">-</button>
+                            <div class="measure-count">4</div>
+                            <button type="button" class="add-beats stepper"
+                                aria-label="Increase beats per measure">+</button>
+                        </div>
+                        <span class="beats-per-measure-text">Beats per measure</span>
+                    </div>
+                </section>
+            </div>
+
+            <div id="scale-results" class="scale-results" aria-live="polite">The Guitar Oracle is Listening</div>
+            <div id="scale-results-definition" class="scale-results-definition" aria-live="polite"></div>
 
             <!-- Fretboard Section -->
             <section id="scale-diagram" class="scale-diagram" aria-labelledby="fretboard-heading">
@@ -65,10 +115,13 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Guitar Oracle. All rights reserved.</p>
+            <p>&copy; 2026 Guitar Oracle. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="./guitar.js" type="module"></script>
+    <script src="./metronome.js" type="module"></script>
+    <script src="./tuner.js" type="module"></script>
 </body>
+
 </html>
