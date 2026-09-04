@@ -60,8 +60,6 @@ let beatsPerMeasure = Number(measureCountDisplay.textContent);
 let currentBeat = 0;
 let timer;
 let audioContext;
-let isStarting = false;
-let audioReadyPromise;
 
 function updateTempo(nextTempo) {
   tempo = Math.min(280, Math.max(20, nextTempo));
@@ -88,44 +86,13 @@ function playClick() {
   currentBeat = (currentBeat + 1) % beatsPerMeasure;
 }
 
-function prepareAudioContext() {
-  audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
-
-  if (audioContext.state === 'running') {
-    return Promise.resolve();
-  }
-
-  audioReadyPromise ??= audioContext.resume().then(() => {
-    if (audioContext.state !== 'running') {
-      throw new Error(`Audio context is ${audioContext.state}`);
-    }
-  }).finally(() => {
-    audioReadyPromise = undefined;
-  });
-
-  return audioReadyPromise;
-}
-
 function startMetronome() {
-  if (isStarting || timer) {
-    return;
-  }
-
-  isStarting = true;
-  prepareAudioContext().then(() => {
-    currentBeat = 0;
-    playClick();
-    timer = new Timer(playClick, 60000 / tempo, { immediate: false });
-    timer.start();
-    startStopButton.textContent = 'STOP';
-    startStopButton.setAttribute('aria-pressed', 'true');
-  }).catch((error) => {
-    audioContext = undefined;
-    audioReadyPromise = undefined;
-    console.error('Unable to start the metronome audio.', error);
-  }).finally(() => {
-    isStarting = false;
-  });
+  audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+  currentBeat = 0;
+  timer = new Timer(playClick, 60000 / tempo, { immediate: true });
+  timer.start();
+  startStopButton.textContent = 'STOP';
+  startStopButton.setAttribute('aria-pressed', 'true');
 }
 
 function stopMetronome() {
@@ -135,13 +102,6 @@ function stopMetronome() {
   startStopButton.setAttribute('aria-pressed', 'false');
 }
 
-startStopButton.addEventListener('pointerdown', () => {
-  prepareAudioContext().catch((error) => {
-    audioContext = undefined;
-    audioReadyPromise = undefined;
-    console.error('Unable to prepare the metronome audio.', error);
-  });
-}, { passive: true });
 tempoSlider.addEventListener('input', () => updateTempo(Number(tempoSlider.value)));
 decreaseTempoButton.addEventListener('click', () => updateTempo(tempo - 1));
 increaseTempoButton.addEventListener('click', () => updateTempo(tempo + 1));
