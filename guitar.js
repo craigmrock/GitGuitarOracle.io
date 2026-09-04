@@ -360,11 +360,32 @@ import { library } from './library.js';
     const scaleTextLower = scaleText.textContent.toLowerCase();
     const keysSorted = Object.keys(library).sort((a, b) => b.length - a.length);
 
+    function addMinorScaleNotes(definition) {
+      if (!definition.includes('Melodic Minor')) {
+        return definition;
+      }
+
+      const selectedKey = scaleResultsString.split(' ')[0];
+      const selectedScale = scalesData.find((scale) => scale.key === selectedKey);
+      const melodicMinor = selectedScale?.minor.find((scale) => scale.startsWith(`${selectedKey} Melodic Minor:`));
+      const aeolian = selectedScale?.minor.find((scale) => scale.startsWith(`${selectedKey} Aeolian:`));
+
+      if (!melodicMinor || !aeolian) {
+        return definition;
+      }
+
+      const melodicMinorNotes = melodicMinor.split(': ')[1];
+      const aeolianNotes = aeolian.split(': ')[1];
+      return definition
+        .replace('ascending', `ascending: ${melodicMinorNotes}`)
+        .replace('natural minor scale', `natural minor scale: ${aeolianNotes}`);
+    }
+
     for (const key of keysSorted) {
     // Create a regex to match the key as a whole word, case-insensitive
     const regex = new RegExp(`\\b${key}\\b`, 'i');
     if (regex.test(scaleText.textContent)) {
-        scaleDefinitionText.textContent = library[key];
+      scaleDefinitionText.textContent = addMinorScaleNotes(library[key]);
         found = true;
         break;
     }
