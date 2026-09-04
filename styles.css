@@ -524,6 +524,7 @@ label {
     display: flex;
     flex-direction: column;
     height: auto;
+    margin-bottom: 8px;
     border: 1px solid #ccc;
     padding: 10px;
     background-color: #fff;

@@ -109,14 +109,14 @@
 
             <!-- Fretboard Section -->
             <section id="scale-diagram" class="scale-diagram" aria-labelledby="fretboard-heading">
-                <h2 id="fretboard-heading">Fretboard Diagram</h2>
+                <h2 id="fretboard-heading" class="visually-hidden">Fretboard Diagram</h2>
+                <div id="fretboard1" class="fretboard1 fretboard-24" role="region" aria-label="Fretboard">
+                    <!-- Fretboard notes will be dynamically generated here -->
+                </div>
                 <div id="fretboard-controls" class="fretboard-controls">
                     <button class="btn btn-outline-secondary" onclick="updateNumberOfFrets(5)">5 Frets</button>
                     <button class="btn btn-outline-secondary" onclick="updateNumberOfFrets(12)">12 Frets</button>
                     <button class="btn btn-outline-secondary" onclick="updateNumberOfFrets(24)">24 Frets</button>
-                </div>
-                <div id="fretboard1" class="fretboard1 fretboard-24" role="region" aria-label="Fretboard">
-                    <!-- Fretboard notes will be dynamically generated here -->
                 </div>
             </section>
         </div>
