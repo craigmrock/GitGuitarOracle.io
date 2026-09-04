@@ -87,27 +87,27 @@ function playClick() {
   currentBeat = (currentBeat + 1) % beatsPerMeasure;
 }
 
-async function startMetronome() {
+function startMetronome() {
   if (isStarting || timer) {
     return;
   }
 
   isStarting = true;
   audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+  playClick();
 
-  try {
-    await audioContext.resume();
+  audioContext.resume().then(() => {
     currentBeat = 0;
-    timer = new Timer(playClick, 60000 / tempo, { immediate: true });
+    timer = new Timer(playClick, 60000 / tempo, { immediate: false });
     timer.start();
     startStopButton.textContent = 'STOP';
     startStopButton.setAttribute('aria-pressed', 'true');
-  } catch (error) {
+  }).catch((error) => {
     audioContext = undefined;
     console.error('Unable to start the metronome audio.', error);
-  } finally {
+  }).finally(() => {
     isStarting = false;
-  }
+  });
 }
 
 function stopMetronome() {
