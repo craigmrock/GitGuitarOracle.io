@@ -60,6 +60,7 @@ let beatsPerMeasure = Number(measureCountDisplay.textContent);
 let currentBeat = 0;
 let timer;
 let audioContext;
+let isStarting = false;
 
 function updateTempo(nextTempo) {
   tempo = Math.min(280, Math.max(20, nextTempo));
@@ -74,7 +75,6 @@ function updateTempo(nextTempo) {
 }
 
 function playClick() {
-  audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
   const oscillator = audioContext.createOscillator();
   const gain = audioContext.createGain();
   const isDownbeat = currentBeat === 0;
@@ -87,13 +87,27 @@ function playClick() {
   currentBeat = (currentBeat + 1) % beatsPerMeasure;
 }
 
-function startMetronome() {
-  audioContext?.resume();
-  currentBeat = 0;
-  timer = new Timer(playClick, 60000 / tempo, { immediate: true });
-  timer.start();
-  startStopButton.textContent = 'STOP';
-  startStopButton.setAttribute('aria-pressed', 'true');
+async function startMetronome() {
+  if (isStarting || timer) {
+    return;
+  }
+
+  isStarting = true;
+  audioContext ??= new (window.AudioContext || window.webkitAudioContext)();
+
+  try {
+    await audioContext.resume();
+    currentBeat = 0;
+    timer = new Timer(playClick, 60000 / tempo, { immediate: true });
+    timer.start();
+    startStopButton.textContent = 'STOP';
+    startStopButton.setAttribute('aria-pressed', 'true');
+  } catch (error) {
+    audioContext = undefined;
+    console.error('Unable to start the metronome audio.', error);
+  } finally {
+    isStarting = false;
+  }
 }
 
 function stopMetronome() {
