@@ -21,6 +21,15 @@
         </div>
     </header>
 
+    <div id="mobile-notice" class="mobile-notice" aria-labelledby="mobile-notice-title"
+        aria-describedby="mobile-notice-message" hidden>
+        <div class="container mobile-notice-content">
+            <h2 id="mobile-notice-title">Mobile Notice</h2>
+            <p id="mobile-notice-message"></p>
+            <button type="button" id="close-mobile-notice" class="notice-close">Close</button>
+        </div>
+    </div>
+
     <main class="main-content">
         <div class="container">
 
@@ -124,6 +133,7 @@
     <script src="./guitar.js" type="module"></script>
     <script src="./metronome.js" type="module"></script>
     <script src="./tuner.js" type="module"></script>
+    <script src="./notices.js" type="module"></script>
 </body>
 
 </html>
