@@ -151,6 +151,16 @@ body {
     margin-bottom: 20px;
 }
 
+.scale-example-link {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.scale-example-link:hover,
+.scale-example-link:focus-visible {
+    color: #db2777;
+}
+
 .tuner-panel,
 .metronome-panel {
     min-height: 250px;
