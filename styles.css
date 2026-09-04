@@ -132,12 +132,16 @@ body {
     margin-bottom: 20px;
 }
 
-.control-workspace {
+.scale-output {
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.instrument-tools {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: start;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
-    margin-bottom: 0;
+    margin-top: 24px;
 }
 
 #scale-results,
@@ -149,6 +153,11 @@ body {
 
 .scale-results-definition {
     margin-bottom: 20px;
+}
+
+.scale-generator {
+    width: 100%;
+    margin-bottom: 0;
 }
 
 .scale-example-link {
@@ -251,29 +260,14 @@ body {
     box-shadow: 0 0 0 2px #22c55e;
 }
 
-@media (max-width: 1000px) {
-    .control-workspace {
-        gap: 16px;
-    }
-}
-
 @media (max-width: 768px) {
-    .control-workspace {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .scale-generator {
-        width: 100%;
-    }
-
     .tuner-panel,
     .tuner {
         min-height: auto;
     }
 
-    .control-workspace {
+    .instrument-tools {
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 }
