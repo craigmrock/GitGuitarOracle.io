@@ -360,11 +360,47 @@ import { library } from './library.js';
     const scaleTextLower = scaleText.textContent.toLowerCase();
     const keysSorted = Object.keys(library).sort((a, b) => b.length - a.length);
 
+    function addMinorScaleNotes(definition) {
+      if (!definition.includes('Melodic Minor')) {
+        return definition;
+      }
+
+      const selectedKey = scaleResultsString.split(' ')[0];
+      const selectedScale = scalesData.find((scale) => scale.key === selectedKey);
+      const melodicMinor = selectedScale?.minor.find((scale) => scale.startsWith(`${selectedKey} Melodic Minor:`));
+      const aeolian = selectedScale?.minor.find((scale) => scale.startsWith(`${selectedKey} Aeolian:`));
+
+      if (!melodicMinor || !aeolian) {
+        return definition;
+      }
+
+      const melodicMinorNotes = melodicMinor.split(': ')[1];
+      const aeolianNotes = aeolian.split(': ')[1];
+      return definition
+        .replace('ascending', `<a href="#" class="scale-example-link" data-scale-example="melodic-minor">ascending</a>: ${melodicMinorNotes}`)
+        .replace('natural minor scale', `<a href="#" class="scale-example-link" data-scale-example="aeolian">natural minor scale</a>: ${aeolianNotes}`);
+    }
+
     for (const key of keysSorted) {
     // Create a regex to match the key as a whole word, case-insensitive
     const regex = new RegExp(`\\b${key}\\b`, 'i');
     if (regex.test(scaleText.textContent)) {
-        scaleDefinitionText.textContent = library[key];
+      const definition = addMinorScaleNotes(library[key]);
+      scaleDefinitionText.innerHTML = definition;
+      scaleDefinitionText.querySelectorAll('.scale-example-link').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const selectedKey = scaleResultsString.split(' ')[0];
+          const selectedScale = scalesData.find((scale) => scale.key === selectedKey);
+          const scaleName = link.dataset.scaleExample === 'aeolian' ? 'Aeolian' : 'Melodic Minor';
+          const exampleScale = selectedScale?.minor.find((scale) => scale.startsWith(`${selectedKey} ${scaleName}:`));
+
+          if (exampleScale) {
+            currentScaleNotes = exampleScale.split(': ')[1].split(' - ');
+            setupFretboard(currentScaleNotes);
+          }
+        });
+      });
         found = true;
         break;
     }
