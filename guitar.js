@@ -332,7 +332,7 @@ import { library } from './library.js';
   */
   function updateMessage(key) {
     const messageElement = document.getElementById("message");
-    messageElement.textContent = `You selected the key of: ${key}`;
+    messageElement.textContent = `You selected the key of: ${key}. Excellent! Now select a scale type (Major or Minor) to see the notes on the fretboard.`;
     scaleText.textContent = ''; // Clear the scale-results element
     scaleDefinitionText.textContent = ''; // Clear the scale-definition elemen
   }
